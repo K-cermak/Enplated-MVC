@@ -1,0 +1,46 @@
+@include("partials/head")
+@include("admin/header")
+
+<main>
+    <div class="row my-2 mx-auto justify-content-center text-center mt-5">
+        <div class="card text-center" style="width: 18rem;">
+            <i class="bi bi-stickies-fill"></i>
+            <div class="card-body">
+                <h5 class="card-title">Posts</h5>
+                <p class="card-text">Manage and publish posts.</p>
+                <a href="{{ env("BASE_URL") }}/admin/posts" class="btn btn-primary stretched-link">Go to posts</a>
+            </div>
+        </div>
+
+        <div class="card text-center" style="width: 18rem;">
+            <i class="bi bi-tags-fill"></i>
+            <div class="card-body">
+                <h5 class="card-title">Categories</h5>
+                <p class="card-text">Manage and create categories.</p>
+                <a href="{{ env("BASE_URL") }}/admin/categories" class="btn btn-primary stretched-link">Go to categories</a>
+            </div>
+        </div>
+
+        <div class="card text-center" style="width: 18rem;">
+            <i class="bi bi-tags-fill"></i>
+            <div class="card-body">
+                <h5 class="card-title">Tags</h5>
+                <p class="card-text">Manage and create tags.</p>
+                <a href="{{ env("BASE_URL") }}/admin/tags" class="btn btn-primary stretched-link">Go to tags</a>
+            </div>
+        </div>
+
+        <div class="card text-center" style="width: 18rem;">
+            <i class="bi bi-person-fill"></i>
+            <div class="card-body">
+                <h5 class="card-title">Users</h5>
+                <p class="card-text">Manage and create users.</p>
+                <a href="{{ env("BASE_URL") }}/admin/users" class="btn btn-primary stretched-link">Go to users</a>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+
+@include("partials/footer")

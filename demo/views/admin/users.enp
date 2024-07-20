@@ -1,0 +1,110 @@
+@include("partials/head")
+@include("admin/header")
+
+<main class="text-center mt-3">
+    <h4>Users</h4>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createNewUser"><i class="bi bi-person-plus"></i> Create User</button>
+
+    <div class="container mt-4 d-flex flex-column align-items-center">
+        @if (isset($_GET["success"]) && $_GET["success"] === "createdUser")
+            <div class="alert alert-success mt-3 w-50">User created succesfully.</div>
+        @endif
+
+        <ol class="list-group list-group w-100">
+
+            @foreach ($users as $user)
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{ $user["username"] }}</div>
+                        <span>ID: {{ $user["id"] }}</span>
+                    </div>
+                    @if ($user["postNum"] == 1)
+                        <span class="badge bg-primary rounded-pill">{{ $user["postNum"] }} post</span>
+                    @else
+                        <span class="badge bg-primary rounded-pill">{{ $user["postNum"] }} posts</span>
+                    @endif
+                </li>
+            @endforeach
+        </ol>
+    </div>
+
+</main>
+
+
+
+<div class="modal fade" id="createNewUser">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create a new User</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger d-none"><strong>Error:</strong> <span class="errorMessage"></span>.</div>
+                <label for="username" class="mt-2">Username:</label>
+                <input class="form-control" type="text" name="username" id="username" required>
+
+                <label for="password" class="mt-2">Password:</label>
+                <input class="form-control" type="password" name="password" id="password" required>
+
+                <label for="password2" class="mt-2">Repeat password:</label>
+                <input class="form-control" type="password" name="password2" id="password2" required>
+
+                <input type="button" class="btn btn-primary mt-3 createUser" value="Create user">
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- THIS COULD BE A SEPARATE FILE, BUT IT IS HERE FOR DEMO SIMPLICITY --}}
+<script>
+    document.querySelector(".createUser").addEventListener("click", () => {
+        createUser();
+    });
+
+    document.querySelector(".createUser").addEventListener("keyup", (e) => {
+        if (e.key === "Enter") {
+            createUser();
+        }
+    });
+
+    function createUser() {
+        let username = document.querySelector("#username").value;
+        let password = document.querySelector("#password").value;
+        let password2 = document.querySelector("#password2").value;
+        let errorBox = document.querySelector("#createNewUser .errorMessage");
+
+        // we could add checking for username / password length, but it is already in backend and
+        // it is not necessary to duplicate it here for demo purposes
+
+        if (password !== password2) {
+            errorBox.parentNode.classList.remove("d-none");
+            errorBox.innerText = "Passwords do not match";
+            return;
+        }
+
+        fetch(base_url + "/admin/users/create", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.code === 201) {
+                window.location.href = base_url + "/admin/users?success=createdUser";
+            } else {
+                errorBox.parentNode.classList.remove("d-none");
+                errorBox.innerText = data.message;
+            }
+        });
+
+    }
+</script>
+
+<script src="{{ env("BASE_URL") }}/public/js/deleteUrlParam.js"></script>
+@include("partials/footer")

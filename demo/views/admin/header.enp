@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body d-flex justify-content-center px-3" data-bs-theme="dark">
+    <div class="container-fluid">
+        <h2>
+            <a class="navbar-brand d-flex align-items-center" href="{{ env("BASE_URL") }}">
+                <img src="https://cdn.karlosoft.com/public/img/favicon.png" alt="Karlosoft" height="50" class="me-2">Blog Admin
+            </a>
+        </h2>
+
+        @if (isset($_SESSION["loggedId"]))
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ env("BASE_URL") }}/admin/posts">Posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ env("BASE_URL") }}/admin/categories">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ env("BASE_URL") }}/admin/tags">Tags</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ env("BASE_URL") }}/admin/users">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ env("BASE_URL") }}/admin/profile">My Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-danger" href="{{ env("BASE_URL") }}/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        @endif
+    </div>
+</nav>

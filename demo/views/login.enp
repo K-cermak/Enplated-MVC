@@ -1,0 +1,39 @@
+@include("partials/head")
+@include("admin/header")
+
+<main>
+    <div class="container d-flex flex-column justify-content-center col-md-4 text-center">
+        <h1 class="mt-3 mb-5">Login</h1>
+        
+        @if (isset($_SESSION["errorMessage"]))
+            <div class="alert alert-danger"><strong>Error:</strong> {{ $_SESSION["errorMessage"] }}.</div>
+            @php
+                unset($_SESSION["errorMessage"]);   
+            @endphp
+        @endif
+            @if (isset($_SESSION["successMessage"]))
+            <div class="alert alert-success"><strong>Error:</strong> {{ $_SESSION["successMessage"] }}.</div>
+            @php
+                unset($_SESSION["successMessage"]);   
+            @endphp
+        @endif
+        
+
+        <form action="{{ env("BASE_URL") }}/login" method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" class="form-control" required>
+            </div>
+            <div class="form-group mt-2">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control" required>
+            </div>
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+
+@include("partials/footer")
