@@ -7,7 +7,7 @@
     */
 
     /*BASIC*/
-    require_once __DIR__ . '/engine/init/errorHandler.php';
+        require_once __DIR__ . '/engine/init/errorHandler.php';
         require_once __DIR__ . '/engine/init/envParser.php';
         require_once __DIR__ . '/engine/init/helper.php';
 

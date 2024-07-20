@@ -18,7 +18,7 @@
         <div class='d-flex align-items-center justify-content-center vh-100' style='background-color: #222222;'>
             <div class='text-center'>
                 <h1 class='display-1 fw-bold mb-4'>Error | 500</h1>
-                <p class='lead'>>We apologize, but there was an error on the server. Please try again or in a moment.</p>
+                <p class='lead'>We apologize, but there was an error on the server. Please try again or in a moment.</p>
                 <p>In case of problems, please contact us by e-mail <strong class='text-danger'>info@example.com</strong>.</p>
                 <a href='https://example.com/' class='btn btn-danger mt-4'>Back to home page</a>
             </div>

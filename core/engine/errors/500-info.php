@@ -1,5 +1,4 @@
 <?php
-    //set response code to 500
     http_response_code(500);
 ?>
 
@@ -17,16 +16,29 @@
     <div class='container'>
         <div class='row'>
             <div class='col-12'>
-                <h1 class='text-center mt-4'>500 Error Debug</h1>
+                <h1 class='text-center mt-4 text-danger d-flex justify-content-center align-items-center'>
+                    <svg class="me-2" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-bug" viewBox="0 0 16 16">
+                        <path d="M4.355.522a.5.5 0 0 1 .623.333l.291.956A5 5 0 0 1 8 1c1.007 0 1.946.298 2.731.811l.29-.956a.5.5 0 1 1 .957.29l-.41 1.352A5 5 0 0 1 13 6h.5a.5.5 0 0 0 .5-.5V5a.5.5 0 0 1 1 0v.5A1.5 1.5 0 0 1 13.5 7H13v1h1.5a.5.5 0 0 1 0 1H13v1h.5a1.5 1.5 0 0 1 1.5 1.5v.5a.5.5 0 1 1-1 0v-.5a.5.5 0 0 0-.5-.5H13a5 5 0 0 1-10 0h-.5a.5.5 0 0 0-.5.5v.5a.5.5 0 1 1-1 0v-.5A1.5 1.5 0 0 1 2.5 10H3V9H1.5a.5.5 0 0 1 0-1H3V7h-.5A1.5 1.5 0 0 1 1 5.5V5a.5.5 0 0 1 1 0v.5a.5.5 0 0 0 .5.5H3c0-1.364.547-2.601 1.432-3.503l-.41-1.352a.5.5 0 0 1 .333-.623M4 7v4a4 4 0 0 0 3.5 3.97V7zm4.5 0v7.97A4 4 0 0 0 12 11V7zM12 6a4 4 0 0 0-1.334-2.982A3.98 3.98 0 0 0 8 2a3.98 3.98 0 0 0-2.667 1.018A4 4 0 0 0 4 6z"/>
+                    </svg>
+                    Error 500 occurred
+                </h1>
+                <p class='text-center lead text-danger'>Enplated MVC Error Debug v1.0</p>
+                <p class="text-center text-muted">Time: <?php echo date('Y-m-d H:i:s'); ?></p>
                 <div class='row'>
                     <div class='col-12'>
                         <hr>
-                        <h2>Debug info:</h2>
+                        <h2 class="text-warning d-flex align-items-center">
+                            <svg class="me-2" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                            </svg>    
+                            Debug info:
+                        </h2>
                         <hr>
                         <div class='row ms-3'>
                             <div class='col-12'>
                                 <h3>Error code:</h3>
-                                <p class='ms-3'><?php echo $_ENV['ERROR']['code']; ?></p>
+                                <p class='ms-3 errorCode'><?php echo $_ENV['ERROR']['code']; ?></p>
                                 
                                 <div class='accordion ms-3' id='accordionFlushExample'>
                                     <div class='accordion-item'>
@@ -35,7 +47,7 @@
                                         </h2>
                                         <div id='flush-collapseOne' class='accordion-collapse collapse' aria-labelledby='flush-headingOne' data-bs-parent='#accordionFlushExample'>
                                             <div class='accordion-body'>
-                                                <table class='table table-striped table-dark'>
+                                                <table class='table table-striped table-dark errorsTable'>
                                                     <thead>
                                                         <tr>
                                                             <th scope='col'>Code</th>
@@ -136,7 +148,12 @@
                 <div class='row'>
                     <div class='col-12'>
                         <hr>
-                        <h2>Code snippet:</h2>
+                        <h2 class="text-warning d-flex align-items-center">
+                            <svg class="me-2" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
+                                <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0m6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0"/>
+                            </svg>
+                            Code snippet:
+                        </h2>
                         <hr>
 
                         <p class='lead'><strong>File name:</strong> 
@@ -155,7 +172,8 @@
                                         
                                         //check if file exists
                                         if (!file_exists($file)) {
-                                            echo 'File not found';
+                                            echo 'File not found, it was probably evaluated code.<br><br>';
+                                            echo 'Tip: Change DEBUG_BUFFER to true in .env file to see evaluated code in folder /debug.';
                                         } else {
                                             $file = fopen($_ENV['ERROR']['file'], 'r');
 
@@ -183,7 +201,12 @@
                 <div class='row my-5'>
                     <div class='col-12'>
                         <hr>
-                        <h2>All Configured Variables:</h2>
+                        <h2 class="text-warning d-flex align-items-center">
+                            <svg class="me-2" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-database" viewBox="0 0 16 16">
+                                <path d="M4.318 2.687C5.234 2.271 6.536 2 8 2s2.766.27 3.682.687C12.644 3.125 13 3.627 13 4c0 .374-.356.875-1.318 1.313C10.766 5.729 9.464 6 8 6s-2.766-.27-3.682-.687C3.356 4.875 3 4.373 3 4c0-.374.356-.875 1.318-1.313M13 5.698V7c0 .374-.356.875-1.318 1.313C10.766 8.729 9.464 9 8 9s-2.766-.27-3.682-.687C3.356 7.875 3 7.373 3 7V5.698c.271.202.58.378.904.525C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777A5 5 0 0 0 13 5.698M14 4c0-1.007-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1s-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4v9c0 1.007.875 1.755 1.904 2.223C4.978 15.71 6.427 16 8 16s3.022-.289 4.096-.777C13.125 14.755 14 14.007 14 13zm-1 4.698V10c0 .374-.356.875-1.318 1.313C10.766 11.729 9.464 12 8 12s-2.766-.27-3.682-.687C3.356 10.875 3 10.373 3 10V8.698c.271.202.58.378.904.525C4.978 9.71 6.427 10 8 10s3.022-.289 4.096-.777A5 5 0 0 0 13 8.698m0 3V13c0 .374-.356.875-1.318 1.313C10.766 14.729 9.464 15 8 15s-2.766-.27-3.682-.687C3.356 13.875 3 13.373 3 13v-1.302c.271.202.58.378.904.525C4.978 12.71 6.427 13 8 13s3.022-.289 4.096-.777c.324-.147.633-.323.904-.525"/>
+                            </svg>
+                            All Configured Variables:
+                        </h2>
                         <hr>
                         <div class='row ms-3'>
                             <div class='col-12 mt-3'>
@@ -255,6 +278,18 @@
         }
 
         document.querySelector('.envVars').innerHTML = text;
+
+        let errorCode = document.querySelector('.errorCode');
+        for (let i = 0; i < document.querySelectorAll('.errorsTable tr').length; i++) {
+            let row = document.querySelectorAll('.errorsTable tr')[i];
+            if (row.querySelector('th').innerHTML == errorCode.innerHTML) {
+                row.classList.add('table-danger');
+                console.log(row.querySelector('td').innerHTML);
+                errorCode.innerHTML += " (" + row.querySelector('td').innerHTML + ")";
+                break;
+            }
+        }
+
     </script>
 
     <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js' integrity='sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz' crossorigin='anonymous'></script>

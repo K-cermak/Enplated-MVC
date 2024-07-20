@@ -10,8 +10,8 @@
         //DELETE ALL CONTENT BETWEEN {{-- AND --}}
         $buffer = preg_replace('/\{\{--.*--\}\}/sU', '', $buffer);
 
-        //INCLUDE 
-        foreach (explode('\n', $buffer) as $line) {
+        //INCLUDE
+        foreach (explode(PHP_EOL, $buffer) as $line) {
             //if line contain @include, get file name between ' or "
             if (str_contains($line, '@include')) {
                 //get file name between '
@@ -65,8 +65,10 @@
         }
         
         if ((isset($_ENV['APP']['DEBUG_BUFFER'])) && ($_ENV['APP']['DEBUG_BUFFER'])) {
-            //create random file in /debug and save buffer to it
-            $debugFile = __DIR__ . '/../debug/' . rand(100000, 999999) . '.php';
+            //create file in /debug and save buffer to it
+            $now = DateTime::createFromFormat('U.u', microtime(true));
+            $name = $now->format("m-d-Y-H-i-s-u");
+            $debugFile = __DIR__ . '/../debug/' . $name . '.php';
             file_put_contents($debugFile, $buffer);
         }
 
@@ -79,8 +81,8 @@
         $string = ' ' . $string;
         $ini = strpos($string, $start);
 
-        if ($ini === 0) {
-            return '';
+        if ($ini === false) {
+            return null;
         }
 
         $ini += strlen($start);
