@@ -9,10 +9,10 @@
     }
 
     function checkRoute($method, $path, $callback) {
-        logToJsConsole('Checking route: $method $path');
+        logToJsConsole("----------------------------------------");
+        logToJsConsole("Checking route: $method $path");
         logToJsConsole('Request method: ' . $_ENV['REQUEST']['METHOD']);
         logToJsConsole('Request path: ' . $_ENV['REQUEST']['URI']);
-        logToJsConsole('Request path without base url: ' . str_replace(getAppEnvVar('BASE_URL'), '', $_ENV['REQUEST']['URI']));
 
         if (isset($_ENV['REQUEST']['FOUND'])) {
             logToJsConsole('Route already found, skipping');
@@ -62,7 +62,7 @@
 
         //if part contain ?, remove text after ?
         $requestParts = array_map(function ($part) {
-            if (!strpos($part, '?')) {
+            if (strpos($part, '?')) {
                 return substr($part, 0, strpos($part, '?'));
             }
             return $part;
@@ -84,7 +84,7 @@
                 $variableName = substr($pathParts[$i], 1, -1);
                 $_ENV['REQUEST']['PARAMS'][$variableName] = $requestParts[$i];
             } else if ($pathParts[$i] !== $requestParts[$i]) {
-                logToJsConsole('Path not match, skipping (different parts)');
+                logToJsConsole('Path not match, skipping (different parts) - (' . $pathParts[$i] . ' vs ' . $requestParts[$i] . ')');
                 return;
             }
         }

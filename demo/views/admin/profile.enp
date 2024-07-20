@@ -76,7 +76,7 @@
         changeUsername();
     });
 
-    document.querySelector("#newUsername").addEventListener("keyup", (e) => {
+    document.querySelector("#newPassword2").addEventListener("keyup", (e) => {
         if (e.key === "Enter") {
             changeUsername();
         }

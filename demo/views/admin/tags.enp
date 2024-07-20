@@ -1,0 +1,123 @@
+@include("partials/head")
+@include("admin/header")
+
+<main class="text-center mt-3">
+    <h4>Tags</h4>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createNewTag"><i class="bi bi-tag"></i> Create Tag</button>
+
+    <div class="container mt-4 d-flex flex-column align-items-center">
+        @if (isset($_GET["success"]) && $_GET["success"] === "createdTag")
+            <div class="alert alert-success mt-3 w-50">Tag created succesfully.</div>
+        @elseif (isset($_GET["success"]) && $_GET["success"] === "deletedTag")
+            <div class="alert alert-success mt-3 w-50">Tag deleted succesfully.</div>
+        @elseif (isset($_GET["success"]) && $_GET["success"] === "renamedTag")
+            <div class="alert alert-success mt-3 w-50">Tag renamed succesfully.</div>
+        @endif
+
+        <ol class="list-group list-group w-100">
+            @if ($tags == null || count($tags) == 0)
+                <div class="alert alert-warning mt-3 w-100 px-5">No tags found.</div>
+            @else
+                @foreach ($tags as $tag)
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto text-start">
+                            <div class="fw-bold">{{ $tag["name"] }}<span class="badge bg-primary rounded-pill ms-2">Used: {{ $tag["tag_count"] }}x</span></div>
+                            <span><a href="{{ env("BASE_URL") }}/tag/{{ $tag["slug"] }}" target="_blank">Posts with this tag</a></span>
+                        </div>
+                        <a href="{{ env("BASE_URL") }}/admin/tags/rename/{{ $tag["slug"] }}" class="btn btn-warning btn-sm m-1"><i class="bi bi-tag"></i> Rename</a>
+                        @if ($tag["tag_count"] == 0)
+                            <a href="{{ env("BASE_URL") }}/admin/tags/delete/{{ $tag["slug"] }}" class="btn btn-danger btn-sm m-1"><i class="bi bi-trash3"></i> Delete</a>
+                        @endif
+                    </li>
+                @endforeach
+            @endif
+        </ol>
+    </div>
+</main>
+
+
+<div class="modal fade" id="createNewTag">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create a new Tag</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger d-none"><strong>Error:</strong> <span class="errorMessage"></span>.</div>
+                <label for="tagname" class="mt-2">Tag:</label>
+                <input class="form-control" type="text" name="tagname" id="tagname" required>
+
+                <label for="slug" class="mt-2">Slug:</label>
+                <input class="form-control" type="text" name="slug" id="slug" required>
+
+                <input type="button" class="btn btn-primary mt-3 createTag" value="Create tag">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{{-- THIS COULD BE A SEPARATE FILE, BUT IT IS HERE FOR DEMO SIMPLICITY --}}
+<script>
+    document.querySelector("#tagname").addEventListener("blur", () => {
+        let tagname = document.querySelector("#tagname").value;
+        let slug = document.querySelector("#slug").value;
+
+        if (slug === "") {
+            document.querySelector("#slug").value = stringToSlug(tagname);
+        }
+    });
+    document.querySelector("#slug").addEventListener("blur", () => {
+        let slug = document.querySelector("#slug").value;
+        document.querySelector("#slug").value = stringToSlug(slug);
+    });
+
+
+    document.querySelector(".createTag").addEventListener("click", () => {
+        createTag();
+    });
+    document.querySelector("#slug").addEventListener("keyup", (e) => {
+        if (e.key === "Enter") {
+            createTag();
+        }
+    });
+
+    function createTag() {
+        let tagname = document.querySelector("#tagname").value;
+        let slug = document.querySelector("#slug").value;
+        slug = stringToSlug(slug);
+        document.querySelector("#slug").value = slug;
+
+        let errorBox = document.querySelector("#createNewTag .errorMessage");
+
+        // we could add checking for tagname / slug length, but it is already in backend and
+        // it is not necessary to duplicate it here for demo purposes
+
+
+        fetch(base_url + "/admin/tags/create", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                tagname: tagname,
+                slug: slug
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.code === 201) {
+                window.location.href = base_url + "/admin/tags?success=createdTag";
+            } else {
+                errorBox.parentNode.classList.remove("d-none");
+                errorBox.innerText = data.message;
+            }
+        });
+    }
+</script>
+
+<script src="{{ env("BASE_URL") }}/public/js/stringToSlug.js"></script>
+<script src="{{ env("BASE_URL") }}/public/js/deleteUrlParam.js"></script>
+@include("partials/footer")

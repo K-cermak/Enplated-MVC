@@ -24,13 +24,12 @@
         $username = $data["newUsername"];
         $userId = $_SESSION["loggedId"];
 
-        //if length is less than 3
-        if (strlen($username) < 3) {
+        if (strlen($username) < 3 || strlen($username) > 50) {
             http_response_code(400);
             
             resourceView([
                 "code" => 400,
-                "message" => "Username must be at least 3 characters long",
+                "message" => "Username must be at least 3 characters long and not longer than 50 characters",
                 "time" => date("Y-m-d H:i:s")
             ], 'json');
         }
@@ -75,7 +74,6 @@
         $newPassword = $data["newPassword"];
         $userId = $_SESSION["loggedId"];
 
-        //if length is less than 6
         if (strlen($newPassword) < 6) {
             http_response_code(400);
             
@@ -133,13 +131,12 @@
         $username = $data["username"];
         $password = $data["password"];
 
-        //if length of username is less than 3
-        if (strlen($username) < 3) {
+        if (strlen($username) < 3 || strlen($username) > 50) {
             http_response_code(400);
             
             resourceView([
                 "code" => 400,
-                "message" => "Username must be at least 3 characters long",
+                "message" => "Username must be at least 3 characters long and not longer than 50 characters",
                 "time" => date("Y-m-d H:i:s")
             ], 'json');
         }
@@ -155,7 +152,6 @@
             ], 'json');
         }
         
-        //if length of pass is less than 6
         if (strlen($password) < 6) {
             http_response_code(400);
             

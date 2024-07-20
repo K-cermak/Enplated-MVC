@@ -14,7 +14,7 @@
 
             @foreach ($users as $user)
                 <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
+                    <div class="ms-2 me-auto text-start">
                         <div class="fw-bold">{{ $user["username"] }}</div>
                         <span>ID: {{ $user["id"] }}</span>
                     </div>
@@ -62,7 +62,7 @@
         createUser();
     });
 
-    document.querySelector(".createUser").addEventListener("keyup", (e) => {
+    document.querySelector("#password2").addEventListener("keyup", (e) => {
         if (e.key === "Enter") {
             createUser();
         }
@@ -102,7 +102,6 @@
                 errorBox.innerText = data.message;
             }
         });
-
     }
 </script>
 
