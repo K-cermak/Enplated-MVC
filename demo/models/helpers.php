@@ -9,12 +9,11 @@
     function isLogged() {
         if (!isset($_SESSION["loggedId"])) {
             http_response_code(403);
-            
             resourceView([
                 "code" => 403,
                 "message" => "Not logged",
                 "time" => date("Y-m-d H:i:s")
-            ], 'json');
+            ], "json");
         }
     }
 ?>

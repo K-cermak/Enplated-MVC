@@ -1,0 +1,177 @@
+@include("partials/head")
+@include("admin/header")
+
+<script>
+    window.onbeforeunload = function(){
+        return "Are you sure you want to leave?";
+    };
+</script>
+
+<main class="text-center mt-3">
+    <h4>Create Post</h4>
+    <a href="{{ env("BASE_URL") }}/admin/posts" class="btn btn-primary mt-3"><i class="bi bi-arrow-left"></i> Back to posts</a>
+    <div class="d-flex justify-content-center mt-3">
+        <div class="alert alert-danger d-none w-50"><strong>Error:</strong> <span class="errorMessage"></span>.</div>
+    </div>
+
+    <div class="mx-5 mt-5 newPageEditor">
+        <div class="row">
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-12 p-0">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="title" placeholder="Title">
+                            <label for="title">Title</label>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="row mt-2">
+                    <div class="col-12 p-0">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="slug" placeholder="Slug">
+                            <label for="slug">Slug</label>
+                        </div>
+                    </div>
+                </div>
+    
+                <h4 class="mt-4">Text:</h4>
+                <div id="editor-container"></div>
+                <br>
+            </div>
+    
+            <div class="col-2">       
+                <div class="mt-4">
+                    <label for="category" class="form-label"><strong>Tags:</strong></label>
+                        @foreach ($tags as $tag)
+                            <br><input class="form-check-input tags" type="checkbox" value="{{ $tag["id"] }}" id="{{ $tag["id"] }}">&nbsp
+                            <label class="form-check-label" for="{{ $tag["id"] }}">{{ $tag["name"] }}</label>
+                        @endforeach
+                </div>
+                
+                <div class="mt-5 text-center">
+                    <button type="button" class="btn btn-primary" id="savePost"><i class="bi bi-check-circle"></i> Publish</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+{{--
+    THIS COULD BE A SEPARATE FILE, BUT IT IS HERE FOR DEMO SIMPLICITY
+    we could also add checking for length on client side, but it is already in backend and
+    it is not necessary to duplicate it here for demo purposes
+--}}
+<script>
+    document.querySelector("#title").addEventListener("blur", () => {
+        let tagname = document.querySelector("#title").value;
+        let slug = document.querySelector("#slug").value;
+
+        if (slug === "") {
+            document.querySelector("#slug").value = stringToSlug(tagname);
+        }
+    });
+    document.querySelector("#slug").addEventListener("blur", () => {
+        let slug = document.querySelector("#slug").value;
+        document.querySelector("#slug").value = stringToSlug(slug);
+    });
+
+    document.querySelector("#savePost").addEventListener("click" , () => {
+        let title = document.querySelector("#title").value;
+        let slug = document.querySelector("#slug").value;
+        let text = document.querySelector(".ql-editor").innerHTML;
+        let tags = [];
+        let tagsArea = document.querySelectorAll(".tags");
+        tagsArea.forEach(tag => {
+            if (tag.checked) {
+                tags.push(tag.value);
+            }
+        });
+
+        fetch(base_url + "/admin/posts/create", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title: title,
+                slug: slug,
+                text: text,
+                tags: tags
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.code === 201) {
+                //redirect without alert
+                window.onbeforeunload = null;
+                window.location.href = base_url + "/admin/posts?success=created";
+            } else {
+                document.querySelector(".errorMessage").parentNode.classList.remove("d-none");
+                document.querySelector(".errorMessage").innerText = data.message;
+            }
+        })
+    });
+</script>
+
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+
+<script>
+    var fonts = ['Montserrat'];
+    function getFontName(font) {
+        return font.toLowerCase().replace(/\s/g, "-");
+    }
+    var fontNames = fonts.map(font => getFontName(font));
+    var fontStyles = "";
+    fonts.forEach(function(font) {
+        var fontName = getFontName(font);
+        fontStyles += ".ql-snow .ql-picker.ql-font .ql-picker-label[data-value=" + fontName + "]::before, .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=" + fontName + "]::before {" +
+            "content: '" + font + "';" +
+            "font-family: '" + font + "', sans-serif;" +
+            "}" +
+            ".ql-font-" + fontName + "{" +
+            " font-family: '" + font + "', sans-serif;" +
+            "}";
+    });
+    var node = document.createElement('style');
+    node.innerHTML = fontStyles;
+    document.body.appendChild(node);
+
+    var toolbarOptions = [
+        [{'font': fontNames}],
+        [{'header': [1, 2, 3, 4, 5, 6, false]}],
+        [{'size': ['small', false, 'large', 'huge']}],
+
+        ['bold', 'italic', 'underline', 'strike'],
+        ['blockquote', 'code-block'],
+
+        [{'list': 'ordered'}, {'list': 'bullet'}],
+        [{'script': 'sub'}, {'script': 'super'}],
+        [{'indent': '-1'}, {'indent': '+1'}],
+        [{'align': []}],
+
+        [{'color': []}, {'background': []}],
+        ['link', 'image', 'video'],
+        ['clean']
+    ];
+
+    var Font = Quill.import('formats/font');
+    Font.whitelist = fontNames;
+    Quill.register(Font, true);
+
+    var quill = new Quill('#editor-container', {
+        modules: {
+            toolbar: toolbarOptions
+        },
+        theme: 'snow',
+    });
+</script>
+
+<script src="{{ env("BASE_URL") }}/public/js/stringToSlug.js"></script>
+@include("partials/footer")

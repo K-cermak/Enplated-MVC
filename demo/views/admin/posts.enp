@@ -1,0 +1,48 @@
+@include("partials/head")
+@include("admin/header")
+
+<main class="text-center mt-3">
+    <h4>Posts</h4>
+    <a href="{{ env("BASE_URL") }}/admin/posts/create" class="btn btn-primary"><i class="bi bi-file-earmark-plus"></i> Create Post</a>
+
+    <div class="container mt-4 d-flex flex-column align-items-center">
+        @if (isset($_GET["success"]) && $_GET["success"] === "created")
+            <div class="alert alert-success alert-dismissible fade show w-50" role="alert">Post created succesfully.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @elseif (isset($_GET["success"]) && $_GET["success"] === "deletedPost")
+            <div class="alert alert-success alert-dismissible fade show w-50" role="alert">Post deleted succesfully.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+
+        <ol class="list-group list-group w-100">
+            @if ($posts == null || count($posts) == 0)
+                <div class="alert alert-warning mt-3 w-100 px-5">No posts found.</div>
+            @else
+                @foreach ($posts as $post)
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto text-start">
+                            <div class="fw-bold">{{ $post["title"] }}</div>
+                            <span><strong>Author:</strong> {{ $post["author_name"] }}</span><br>
+                            <span><strong>Created at:</strong> @php echo date("d. m. Y H:i:s", strtotime($post["created_at"])) @endphp</span><br>
+                            @if ($post["created_at"] != $post["updated_at"])
+                                <span><strong>Updated at:</strong> @php echo date("d. m. Y H:i:s", strtotime($post["updated_at"])) @endphp</span><br>
+                            @endif
+                        </div>
+                        <a href="{{ env("BASE_URL") }}/post/{{ $post["slug"] }}" target="_blank" class="btn btn-primary btn-sm m-1"><i class="bi bi-box-arrow-up-right"></i> Open Post</a>
+
+                        @if ($post["author"] == $_SESSION["loggedId"])
+                            <a href="{{ env("BASE_URL") }}/admin/posts/edit/{{ $post["slug"] }}" class="btn btn-warning btn-sm m-1"><i class="bi bi-pencil-square"></i> Edit</a>
+                            <a href="{{ env("BASE_URL") }}/admin/posts/delete/{{ $post["slug"] }}" class="btn btn-danger btn-sm m-1"><i class="bi bi-trash3"></i> Delete</a>
+                        @endif
+                    </li>
+                @endforeach
+            @endif
+        </ol>
+    </div>
+</main>
+
+<script src="{{ env("BASE_URL") }}/public/js/deleteUrlParam.js"></script>
+@include("partials/footer")

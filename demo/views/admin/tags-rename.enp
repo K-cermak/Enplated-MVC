@@ -21,10 +21,11 @@
 </main>
 
 
-
-
-
-{{-- THIS COULD BE A SEPARATE FILE, BUT IT IS HERE FOR DEMO SIMPLICITY --}}
+{{--
+    THIS COULD BE A SEPARATE FILE, BUT IT IS HERE FOR DEMO SIMPLICITY
+    we could also add checking for length on client side, but it is already in backend and
+    it is not necessary to duplicate it here for demo purposes
+--}}
 <script>
     document.querySelector("#tagname").addEventListener("blur", () => {
         let tagname = document.querySelector("#tagname").value;
@@ -54,13 +55,7 @@
         let slug = document.querySelector("#slug").value;
         let errorBox = document.querySelector(".errorMessage");
 
-        if (tagname === "" || slug === "") {
-            errorBox.innerText = "Tag name and slug are required";
-            document.querySelector(".alert").classList.remove("d-none");
-            return;
-        }
-
-        fetch(base_url + "/admin/tags/rename", {
+        fetch(base_url + "/admin/tags", {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

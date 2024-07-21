@@ -7,11 +7,17 @@
 
     <div class="container mt-4 d-flex flex-column align-items-center">
         @if (isset($_GET["success"]) && $_GET["success"] === "createdTag")
-            <div class="alert alert-success mt-3 w-50">Tag created succesfully.</div>
+            <div class="alert alert-success alert-dismissible fade show w-50" role="alert">Tag created succesfully.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         @elseif (isset($_GET["success"]) && $_GET["success"] === "deletedTag")
-            <div class="alert alert-success mt-3 w-50">Tag deleted succesfully.</div>
+            <div class="alert alert-success alert-dismissible fade show w-50" role="alert">Tag deleted succesfully.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         @elseif (isset($_GET["success"]) && $_GET["success"] === "renamedTag")
-            <div class="alert alert-success mt-3 w-50">Tag renamed succesfully.</div>
+            <div class="alert alert-success alert-dismissible fade show w-50" role="alert">Tag renamed succesfully.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         @endif
 
         <ol class="list-group list-group w-100">
@@ -58,8 +64,11 @@
 </div>
 
 
-
-{{-- THIS COULD BE A SEPARATE FILE, BUT IT IS HERE FOR DEMO SIMPLICITY --}}
+{{--
+    THIS COULD BE A SEPARATE FILE, BUT IT IS HERE FOR DEMO SIMPLICITY
+    we could also add checking for length on client side, but it is already in backend and
+    it is not necessary to duplicate it here for demo purposes
+--}}
 <script>
     document.querySelector("#tagname").addEventListener("blur", () => {
         let tagname = document.querySelector("#tagname").value;
@@ -92,11 +101,7 @@
 
         let errorBox = document.querySelector("#createNewTag .errorMessage");
 
-        // we could add checking for tagname / slug length, but it is already in backend and
-        // it is not necessary to duplicate it here for demo purposes
-
-
-        fetch(base_url + "/admin/tags/create", {
+        fetch(base_url + "/admin/tags", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

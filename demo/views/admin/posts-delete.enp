@@ -1,43 +1,43 @@
 @include("partials/head")
 @include("admin/header")
 <script>
-    let tagId = {{ $tag["id"] }};
+    let postId = {{ $post["id"] }};
 </script> 
 
 <main class="text-center mt-3">
-    <h4>Delete tag</h4>
-    <a href="{{ env("BASE_URL") }}/admin/tags" class="btn btn-primary mt-3"><i class="bi bi-arrow-left"></i> Back to tags</a>
+    <h4>Delete posts</h4>
+    <a href="{{ env("BASE_URL") }}/admin/posts" class="btn btn-primary mt-3"><i class="bi bi-arrow-left"></i> Back to posts</a>
     
     <div class="container mt-5 text-center">
         <div class="alert alert-danger d-none"><strong>Error:</strong> <span class="errorMessage"></span>.</div>
-        <h5>Are you sure you want to delete the tag <strong>{{ $tag["name"] }}</strong>?</h5>
-        <button class="btn btn-danger mt-3 deleteTag"><i class="bi bi-trash3"></i> Delete tag</button>
+        <h5>Are you sure you want to delete the post <strong>{{ $post["title"] }}</strong>?</h5>
+        <button class="btn btn-danger mt-3 deletePost"><i class="bi bi-trash3"></i> Delete post</button>
     </div>
 </main>
 
 
 {{-- THIS COULD BE A SEPARATE FILE, BUT IT IS HERE FOR DEMO SIMPLICITY --}}
 <script>
-    document.querySelector(".deleteTag").addEventListener("click", () => {
-        deleteTag();
+    document.querySelector(".deletePost").addEventListener("click", () => {
+        deletePost();
     });
 
-    function deleteTag() {
+    function deletePost() {
         let errorBox = document.querySelector(".errorMessage");
 
-        fetch(base_url + "/admin/tags", {
+        fetch(base_url + "/admin/posts", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                id: tagId
+                id: postId
             })
         })
         .then(response => response.json())
         .then(data => {
             if (data.code === 200) {
-                window.location.href = base_url + "/admin/tags?success=deletedTag";
+                window.location.href = base_url + "/admin/posts?success=deletedPost";
             } else {
                 errorBox.innerText = data.message;
                 document.querySelector(".alert").classList.remove("d-none");

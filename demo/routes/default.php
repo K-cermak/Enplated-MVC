@@ -1,8 +1,10 @@
 <?php
+    //LIST HERE ALL ROUTES FILES
     registerRoutesFile(__DIR__ . '/main.php');
     registerRoutesFile(__DIR__ . '/admin/admin.php');
-    registerRoutesFile(__DIR__ . '/admin/users.php');
+    registerRoutesFile(__DIR__ . '/admin/posts.php');
     registerRoutesFile(__DIR__ . '/admin/tags.php');
+    registerRoutesFile(__DIR__ . '/admin/users.php');
 
     function registerRoutesFile($file) {
         require_once $file;

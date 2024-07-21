@@ -15,15 +15,6 @@
         <div class="card text-center" style="width: 18rem;">
             <i class="bi bi-tags-fill"></i>
             <div class="card-body">
-                <h5 class="card-title">Categories</h5>
-                <p class="card-text">Manage and create categories.</p>
-                <a href="{{ env("BASE_URL") }}/admin/categories" class="btn btn-primary stretched-link">Go to categories</a>
-            </div>
-        </div>
-
-        <div class="card text-center" style="width: 18rem;">
-            <i class="bi bi-tags-fill"></i>
-            <div class="card-body">
                 <h5 class="card-title">Tags</h5>
                 <p class="card-text">Manage and create tags.</p>
                 <a href="{{ env("BASE_URL") }}/admin/tags" class="btn btn-primary stretched-link">Go to tags</a>

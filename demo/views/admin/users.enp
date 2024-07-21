@@ -7,7 +7,9 @@
 
     <div class="container mt-4 d-flex flex-column align-items-center">
         @if (isset($_GET["success"]) && $_GET["success"] === "createdUser")
-            <div class="alert alert-success mt-3 w-50">User created succesfully.</div>
+            <div class="alert alert-success alert-dismissible fade show w-50" role="alert">User created succesfully.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         @endif
 
         <ol class="list-group list-group w-100">
@@ -27,10 +29,7 @@
             @endforeach
         </ol>
     </div>
-
 </main>
-
-
 
 <div class="modal fade" id="createNewUser">
     <div class="modal-dialog modal-dialog-centered">
@@ -56,7 +55,12 @@
     </div>
 </div>
 
-{{-- THIS COULD BE A SEPARATE FILE, BUT IT IS HERE FOR DEMO SIMPLICITY --}}
+
+{{--
+    THIS COULD BE A SEPARATE FILE, BUT IT IS HERE FOR DEMO SIMPLICITY
+    we could also add checking for length on client side, but it is already in backend and
+    it is not necessary to duplicate it here for demo purposes
+--}}
 <script>
     document.querySelector(".createUser").addEventListener("click", () => {
         createUser();
@@ -73,9 +77,6 @@
         let password = document.querySelector("#password").value;
         let password2 = document.querySelector("#password2").value;
         let errorBox = document.querySelector("#createNewUser .errorMessage");
-
-        // we could add checking for username / password length, but it is already in backend and
-        // it is not necessary to duplicate it here for demo purposes
 
         if (password !== password2) {
             errorBox.parentNode.classList.remove("d-none");

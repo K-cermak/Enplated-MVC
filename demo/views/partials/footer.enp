@@ -1,7 +1,7 @@
     <footer class="d-flex flex-wrap justify-content-between align-items-center pt-2 mt-5 mb-3 border-top px-3 pb-md-1">
         <span>
             <p class="mb-0 text-muted">© @php echo date("Y"); @endphp Karlosoft and Karel Čermák.</p>
-            <p class="mb-0 text-muted mt-1">❤️ Made with love in Enplated MVC</p>
+            <p class="mb-0 text-muted mt-1">Made with ❤️ in Enplated MVC.</p>
         </span>
 
         <ul class="nav col-md-4 justify-content-center justify-content-md-end mt-3 mt-md-0">

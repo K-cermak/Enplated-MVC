@@ -12,6 +12,12 @@
 
         return $result->fetch_assoc()["id"];
     }
+    
+    function getUsersWithPostNum($db) {
+        $sql = "SELECT users.id, users.username, COUNT(posts.id) as postNum FROM users LEFT JOIN posts ON users.id = posts.author GROUP BY users.id ORDER BY users.username";
+        $result = $db->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 
     function getUsername($db, $id) {
         $sql = "SELECT username FROM users WHERE id = ?";
@@ -37,6 +43,15 @@
         return password_verify($password, $result->fetch_assoc()["password"]);
     }
 
+    function createNewUser($db, $username, $password) {
+        $hashed = password_hash($password, PASSWORD_DEFAULT);
+        
+        $sql = "INSERT INTO users VALUES (NULL, ?, ?)";
+        $stmt = $db->prepare($sql);
+        $stmt->bind_param("ss", $username, $hashed);
+        $stmt->execute();
+        $stmt->close();
+    }
     
     function changeUsername($db, $id, $newUsername) {
         $sql = "UPDATE users SET username = ? WHERE id = ?";
@@ -55,22 +70,4 @@
         $stmt->execute();
         $stmt->close();
     }
-
-    
-    function createNewUser($db, $username, $password) {
-        $hashed = password_hash($password, PASSWORD_DEFAULT);
-        
-        $sql = "INSERT INTO users VALUES (NULL, ?, ?)";
-        $stmt = $db->prepare($sql);
-        $stmt->bind_param("ss", $username, $hashed);
-        $stmt->execute();
-        $stmt->close();
-    }
-
-    function getUsersWithPostNum($db) {
-        $sql = "SELECT users.id, users.username, COUNT(posts.id) as postNum FROM users LEFT JOIN posts ON users.id = posts.author GROUP BY users.id ORDER BY users.username";
-        $result = $db->query($sql);
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
 ?>
