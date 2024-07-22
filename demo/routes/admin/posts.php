@@ -84,7 +84,7 @@
         $title = $data["title"];
         $slug = $data["slug"];
         $text = $data["text"];
-        $tags = $data["tags"] ?? [];
+        $tags = isset($data['tags']) ? $data['tags'] : [];
 
         //title between 5 and 70 characters
         if (strlen($title) < 5 || strlen($title) > 70) {
@@ -166,7 +166,7 @@
         $title = $data["title"];
         $slug = $data["slug"];
         $text = $data["text"];
-        $tags = $data["tags"] ?? [];
+        $tags = isset($data['tags']) ? $data['tags'] : [];
         $id = $data["id"];
 
         //title between 5 and 70 characters

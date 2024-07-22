@@ -1,7 +1,12 @@
 <?php
     /*THIS FILE IS USED ONLY FOR DEMO IMPORT, YOU SHOULD *NOT* USE THIS FRAMEWORK THAT WAY*/
 
-    checkRoute("GET", "/import/database", function() {
+    checkRoute("GET", "/demo/version", function() {
+        echo 'Current PHP version: ' . phpversion();
+        die();
+    });
+
+    checkRoute("GET", "/demo/import", function() {
         echo "Starting import tool.. (" . DateTime::createFromFormat('U.u', microtime(true))->format("Y-m-d H:i:s:u") . ")<br>";
 
         $dbConnection = getDatabaseEnvConn("db");
@@ -125,7 +130,7 @@
 
         try {
             for ($i = 0; $i < count($sql); $i++) {
-                echo "Import part [" . $i + 1 . "/" . count($sql) ."].. (" . DateTime::createFromFormat('U.u', microtime(true))->format("m-d-Y-H-i-s-u") . ")<br>";
+                echo "Import part [" . ($i + 1) . "/" . count($sql) ."].. (" . DateTime::createFromFormat('U.u', microtime(true))->format("m-d-Y-H-i-s-u") . ")<br>";
                 $stmt = $dbConnection->prepare($sql[$i]);
                 $stmt->execute();
             }

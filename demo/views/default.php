@@ -13,7 +13,7 @@
         //INCLUDE
         foreach (explode("\n", $buffer) as $line) {
             //if line contain @include, get file name between ' or "
-            if (str_contains($line, '@include')) {
+            if (strpos($line, '@include') !== false) {
                 //get file name between '
                 if (getStringBetween($line, "'", "'") !== null) {
                     $includeFile = getStringBetween($line, "'", "'");

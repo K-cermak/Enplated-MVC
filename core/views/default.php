@@ -14,7 +14,7 @@
         foreach (explode("\n", $buffer) as $line) {
             // DO NOT USE PHP_EOL, it will not work on file created on different OS
             //if line contain @include, get file name between ' or "
-            if (str_contains($line, '@include')) {
+            if (strpos($line, '@include') !== false) {
                 //get file name between '
                 if (getStringBetween($line, "'", "'") !== null) {
                     $includeFile = getStringBetween($line, "'", "'");

@@ -19,7 +19,7 @@
     ];
 
     //historical reasons, should handle .htaccess
-    if (substr($_ENV['REQUEST']['URI'], 0, 7) === 'public/' || str_starts_with(strtolower($_ENV['REQUEST']['URI']), strtolower(getAppEnvVar('BASE_URL') .  'public/'))) {
+    if (substr($_ENV['REQUEST']['URI'], 0, 7) === 'public/' || strpos(strtolower($_ENV['REQUEST']['URI']), strtolower(getAppEnvVar('BASE_URL') . 'public/')) === 0) {
         if (substr($_ENV['REQUEST']['URI'], 0, 7) === 'public/') {
             $file = getAppEnvVar('BASE_DIRECTORY') . $_ENV['REQUEST']['URI'];
         } else {
