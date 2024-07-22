@@ -11,7 +11,8 @@
         $buffer = preg_replace('/\{\{--.*--\}\}/sU', '', $buffer);
 
         //INCLUDE
-        foreach (explode(PHP_EOL, $buffer) as $line) {
+        foreach (explode("\n", $buffer) as $line) {
+            // DO NOT USE PHP_EOL, it will not work on file created on different OS
             //if line contain @include, get file name between ' or "
             if (str_contains($line, '@include')) {
                 //get file name between '
