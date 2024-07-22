@@ -1,12 +1,12 @@
 <?php
     /*THIS FILE IS USED ONLY FOR DEMO IMPORT, YOU SHOULD *NOT* USE THIS FRAMEWORK THAT WAY*/
 
-    checkRoute("GET", "/demo/version", function() {
+    checkRoute("GET", "/run/version", function() {
         echo 'Current PHP version: ' . phpversion();
         die();
     });
 
-    checkRoute("GET", "/demo/import", function() {
+    checkRoute("GET", "/run/import", function() {
         echo "Starting import tool.. (" . DateTime::createFromFormat('U.u', microtime(true))->format("Y-m-d H:i:s:u") . ")<br>";
 
         $dbConnection = getDatabaseEnvConn("db");
