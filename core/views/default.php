@@ -67,7 +67,7 @@
         if ((isset($_ENV['APP']['DEBUG_BUFFER'])) && ($_ENV['APP']['DEBUG_BUFFER'])) {
             //create file in /debug and save buffer to it
             $now = DateTime::createFromFormat('U.u', microtime(true));
-            $name = $now->format("m-d-Y-H-i-s-u");
+            $name = $now->format("Y-m-d-H-i-s-u");
             $debugFile = __DIR__ . '/../debug/' . $name . '.php';
             file_put_contents($debugFile, $buffer);
         }
