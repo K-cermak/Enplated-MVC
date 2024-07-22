@@ -57,7 +57,7 @@
 
 # Opening the website
 - Open your browser and go to your BASE_URL (e.g. http://localhost/enplated_mvc/demo).
-- If you want to login, click on `Admin dashboard` in the right top corner (or go to *BASE_URL*/admin)
+- If you want to login, click on `Admin dashboard` in the top right corner (or go to \*BASE_URL\*/admin)
     - Login credentials are:
         - `admin` (password: `password`)
         - `admin2` (password: `123456`)
