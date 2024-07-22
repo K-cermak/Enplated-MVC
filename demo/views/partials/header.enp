@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f3d0b2">
+<nav class="navbar navbar-expand-lg navbar-light border-bottom" style="background-color: #161616">
     <div class="container-fluid">
         <h2>
             <a class="navbar-brand d-flex align-items-center" href="{{ env("BASE_URL") }}">
@@ -12,28 +12,22 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-1">
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ env("BASE_URL") }}otazky">Všechny otázky</a>
-                </li>
-
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-1">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Kategorie</a>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tags</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @php
-                            foreach ($categories as $category) {
-                                echo '<li><a class="dropdown-item" href="'.getAppEnvVar("BASE_URL").'kategorie/'.$category["id"].'">'.$category["categoryName"].'</a></li>';
+                            foreach ($tags as $tag) {
+                                echo '<li><a class="dropdown-item" href="' . getAppEnvVar("BASE_URL") . '/tag/' . $tag["slug"] . '">'.$tag["name"].'</a></li>';
                             }
                         @endphp
-
                     </ul>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ env("BASE_URL") }}/login">Admin dashboard</a></a>
+                </li>
             </ul>
-            <form class="d-flex input-group w-auto" method="GET" action="{{ env("BASE_URL") }}search">
-                <input class="form-control" name="q" type="text" placeholder="Hledat" aria-label="Search" value="@php if(isset($_GET["q"])) {echo htmlentities($_GET["q"]); } @endphp"required>
-                <button class="btn btn-warning" type="submit"><i class="bi bi-search"></i></button>
-            </form>
         </div>
     </div>
 </nav>

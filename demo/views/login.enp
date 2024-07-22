@@ -6,7 +6,7 @@
         <h1 class="mt-3 mb-5">Login</h1>
         
         @if (isset($_SESSION["errorMessage"]))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Error:</strong> {{ $_SESSION["errorMessage"] }}.</div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Error:</strong> {{ $_SESSION["errorMessage"] }}.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @php
@@ -14,7 +14,7 @@
             @endphp
         @endif
             @if (isset($_SESSION["successMessage"]))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">{{ $_SESSION["successMessage"] }}.</div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">{{ $_SESSION["successMessage"] }}.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @php

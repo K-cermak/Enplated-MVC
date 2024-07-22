@@ -4,11 +4,12 @@
 <main>
     <div class="container my-5">
         <div class="row">
+            <h1 class="mb-5 text-center">Posts tagged with {{ $tag_name }}</h1>
 
             @if (count($posts) == 0)
                 <div class="container mt-4 d-flex flex-column align-items-center">
                     <ol class="list-group list-group w-100">
-                        <div class="alert alert-warning mt-3 w-100">No posts found. :(</div>
+                        <div class="alert alert-warning mt-3 w-100">No posts found with this tag. :(</div>
                     </ol>
                 </div>
             @endif

@@ -1,0 +1,80 @@
+@include('partials/head')
+@include('partials/header')
+
+<style>
+    .ql-editor, .ql-container {
+        height: auto;
+    }
+    .ql-container {
+        font-size: 20px;
+        font-family: var(--bs-body-font-family);
+    }
+    .ql-tooltip.ql-hidden {
+        display: none;
+    }
+</style>
+
+<script>
+    var postContent = `@php echo $post["text"] @endphp`;
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Alata&family=Montserrat:wght@400;700&family=Roboto:wght@400;700&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<main>
+    <div class="container text-center my-5">
+        <h1>{{ $post["title"] }}</h1>
+        <p class="text-muted">By {{ $username }}</p>
+        <p class="text-muted">Published on @php echo date("F j, Y - H:i", strtotime($post["created_at"])) @endphp</p>
+        @if ($post["created_at"] != $post["updated_at"])
+            <p class="text-muted">Last updated on  @php echo date("F j, Y - H:i", strtotime($post["updated_at"])) @endphp</p>
+        @endif
+
+        @foreach ($usedTags as $tag)
+            <a href='{{ env("BASE_URL") }}/tag/{{ $tag["slug"] }}' class='badge text-bg-primary mx-1' style='text-decoration:none;'>{{ $tag["name"] }}</a>
+        @endforeach
+
+        
+        <div id="editor-container"></div>
+    </div>
+</main>
+
+
+<script>
+    var fonts = ['system-ui', 'Ubuntu', 'Roboto', 'Montserrat', 'Alata'];
+    function getFontName(font) {
+        return font.toLowerCase().replace(/\s/g, "-");
+    }
+    var fontNames = fonts.map(font => getFontName(font));
+    var fontStyles = "";
+    fonts.forEach(function (font) {
+        var fontName = getFontName(font);
+        fontStyles += ".ql-snow .ql-picker.ql-font .ql-picker-label[data-value=" + fontName + "]::before, .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=" + fontName + "]::before {" +
+            "content: '" + font + "';" +
+            "font-family: '" + font + "', sans-serif;" +
+            "}" +
+            ".ql-font-" + fontName + "{" +
+            " font-family: '" + font + "', sans-serif;" +
+            "}";
+    });
+    var node = document.createElement('style');
+    node.innerHTML = fontStyles;
+    document.body.appendChild(node);
+
+    var Font = Quill.import('formats/font');
+    Font.whitelist = fontNames;
+    Quill.register(Font, true);
+
+    var quill = new Quill('#editor-container', {
+        theme: 'bubble',
+        readOnly: true
+    });
+
+    document.querySelector(".ql-editor").innerHTML = postContent;
+</script>
+
+@include('partials/footer')

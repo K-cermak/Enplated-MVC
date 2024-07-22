@@ -38,7 +38,7 @@
         $tags = modelCall("tags", "getTagsWithCount", [getDatabaseEnvConn("db")]);
         $assignedTags = modelCall("posts", "getTagsByPost", [getDatabaseEnvConn("db"), $post["id"]]);
         $assignedTags = array_map(function($tag) {
-            return $tag["tag_id"];
+            return $tag["id"];
         }, $assignedTags);
 
         $template = processTemplate("admin/posts-edit", ["title" => "Posts", "post" => $post, "tags" => $tags, "assignedTags" => $assignedTags]);
