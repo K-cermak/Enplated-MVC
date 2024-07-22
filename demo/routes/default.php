@@ -5,6 +5,7 @@
     registerRoutesFile(__DIR__ . '/admin/posts.php');
     registerRoutesFile(__DIR__ . '/admin/tags.php');
     registerRoutesFile(__DIR__ . '/admin/users.php');
+    registerRoutesFile(__DIR__ . '/demo.php');
 
     function registerRoutesFile($file) {
         require_once $file;

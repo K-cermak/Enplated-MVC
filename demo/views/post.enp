@@ -44,6 +44,7 @@
 </main>
 
 
+{{-- THIS COULD BE A SEPARATE FILE, BUT IT IS HERE FOR DEMO SIMPLICITY --}}
 <script>
     var fonts = ['system-ui', 'Ubuntu', 'Roboto', 'Montserrat', 'Alata'];
     function getFontName(font) {
