@@ -11,7 +11,7 @@
         $slug = getRequestParam("slug");
 
         $tag = modelCall("tags", "getTagInfo", [getDatabaseEnvConn("db"), $slug]);
-        if (!$tag) {
+        if ($tag["id"] == null) {
             unset($_ENV["REQUEST"]["FOUND"]);
             require_once "engine/errors/404.php";
             die();

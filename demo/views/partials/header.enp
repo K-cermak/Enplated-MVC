@@ -16,11 +16,9 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tags</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @php
-                            foreach ($tags as $tag) {
-                                echo '<li><a class="dropdown-item" href="' . getAppEnvVar("BASE_URL") . '/tag/' . $tag["slug"] . '">'.$tag["name"].'</a></li>';
-                            }
-                        @endphp
+                        @foreach ($tags as $tag)
+                            <li><a class="dropdown-item" href="{{ env("BASE_URL") }}/tag/{{ $tag["slug"] }}">{{ $tag["name"] }}</a></li>
+                        @endforeach
                     </ul>
                 </li>
 
