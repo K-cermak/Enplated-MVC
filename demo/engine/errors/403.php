@@ -1,5 +1,4 @@
 <?php
-    //set response code to 403
     http_response_code(403);
 ?>
 
