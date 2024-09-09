@@ -2,6 +2,7 @@
     function processTemplate($templateFile, $templateVars) {
         $templatePath = __DIR__ . '/' . $templateFile . '.enp';
         if (!file_exists($templatePath)) {
+            throw new Exception("Template file '" . $templatePath . "' not found");
             return false;
         }
 

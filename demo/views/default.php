@@ -2,6 +2,7 @@
     function processTemplate($templateFile, $templateVars) {
         $templatePath = __DIR__ . '/' . $templateFile . '.enp';
         if (!file_exists($templatePath)) {
+            throw new Exception("Template file '" . $templatePath . "' not found");
             return false;
         }
 
@@ -12,6 +13,7 @@
 
         //INCLUDE
         foreach (explode("\n", $buffer) as $line) {
+            // DO NOT USE PHP_EOL, it will not work on file created on different OS
             //if line contain @include, get file name between ' or "
             if (strpos($line, '@include') !== false) {
                 //get file name between '
