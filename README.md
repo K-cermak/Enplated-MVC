@@ -54,7 +54,7 @@
 #### How would you compare Enplated MVC with other frameworks? What are the differences compared to Laravel?
 - Enplated MVC clearly doesn't offer as many features as other major frameworks. For example, Enplated MVC has very limited testing, automatic deployment, and similar features.
 
-- However, large frameworks are unnecessarily complicated. Here is a comparison of similar applications written in Laravel and Enplated MVC:
+- However, large frameworks are unnecessarily complicated. Here is a comparison of similar applications written in Enplated MVC and Laravel:
 
 |                  | **Enplated MVC**         | **Laravel**                |
 |------------------|--------------------------|----------------------------|
@@ -63,7 +63,7 @@
 | **Number of Files** | 48 👌                   | 4589 🤷                      |
 | **Supported DB** | MariaDB, MySQL, SQLite 👍   | MariaDB, MySQL, SQLite, PostgreSQL, SQL Server 👌 |
 
-- Laravel is suitable for huge projects with dozens of people working on them. Then Laravel makes sense. Enplated MVC is suitable for small to medium projects and although it doesn't offer the same features as Laravel, it is much faster, smaller, and much more intuitive.
+- Laravel is suitable for huge projects with dozens of people working on them. Enplated MVC is suitable for small to medium projects and although it doesn't offer the same features as Laravel, it is much faster, smaller, and much more intuitive.
 
 #### Is Enplated MVC based on OOP?
 
@@ -93,9 +93,9 @@
 
 <br/>
 
-### Enplated MVC is part of Enplated project
+### Enplated MVC is part of Enplated project:
 - https://enplated.karlosoft.com
 
-### Sources used
+### Sources used:
 - Bootstrap (https://getbootstrap.com)
 - Bootstrap Icons (https://icons.getbootstrap.com)
