@@ -18,38 +18,6 @@
         'METHOD' => $_SERVER['REQUEST_METHOD'],
     ];
 
-    //historical reasons, should handle .htaccess
-    if (substr($_ENV['REQUEST']['URI'], 0, 7) === 'public/' || strpos(strtolower($_ENV['REQUEST']['URI']), strtolower(getAppEnvVar('BASE_URL') . 'public/')) === 0) {
-        if (substr($_ENV['REQUEST']['URI'], 0, 7) === 'public/') {
-            $file = getAppEnvVar('BASE_DIRECTORY') . $_ENV['REQUEST']['URI'];
-        } else {
-            $file = getAppEnvVar('BASE_DIRECTORY') . substr($_ENV['REQUEST']['URI'], strlen(getAppEnvVar('BASE_URL')));
-        }
-
-        if (!file_exists($file)) {
-            require_once __DIR__ . '/../errors/404.php';
-            exit;
-        }
-
-        $fileInfo = pathinfo($file);
-        $fileType = $fileInfo['extension'];
-        $mimeType = mime_content_type($file);
-
-        //for security reasons disable php files 
-        if ($fileType === 'php') {
-            require_once __DIR__ . '/../errors/404.php';
-            exit;
-        }
-
-        if ($fileType === 'js' || $fileType === 'css') {
-            $mimeType = 'text/' . $fileType;
-        }
-
-        header("Content-Type: $mimeType");
-        readfile($file);
-        exit;
-    }
-
     function convertHexUrl($url) {
         preg_match_all('/%[0-9a-fA-F]{2}/', $url, $matches);
         foreach ($matches[0] as $char) {
