@@ -1,32 +1,7 @@
 <?php
     function processTemplate($templateFile, $templateVars) {
-        $templatePath = __DIR__ . '/' . $templateFile . '.enp';
-        if (!file_exists($templatePath)) {
-            throw new Exception("Template file '" . $templatePath . "' not found");
-            return false;
-        }
-
-        $buffer = file_get_contents($templatePath);
-
-        //DELETE ALL CONTENT BETWEEN {{-- AND --}}
-        $buffer = preg_replace('/\{\{--.*--\}\}/sU', '', $buffer);
-
-        //INCLUDE
-        foreach (explode("\n", $buffer) as $line) {
-            // DO NOT USE PHP_EOL, it will not work on file created on different OS
-            //if line contain @include, get file name between ' or "
-            if (strpos($line, '@include') !== false) {
-                //get file name between '
-                if (getStringBetween($line, "'", "'") !== null) {
-                    $includeFile = getStringBetween($line, "'", "'");
-                } else {
-                    //get file name between "
-                    $includeFile = getStringBetween($line, '"', '"');
-                }
-                $data = processTemplate($includeFile, $templateVars);
-                $buffer = str_replace($line, $data, $buffer);
-            }
-        }
+        //LOAD TEMPLATE SOURCE (INCLUDING ALL @include FILES)
+        $buffer = loadTemplateSource($templateFile);
 
         //PATTERNS
         $patterns = [
@@ -76,6 +51,45 @@
 
         //eval code to buffer, do not print
         $buffer = eval("ob_start(); ?>$buffer<?php return ob_get_clean();");
+        return $buffer;
+    }
+
+    function loadTemplateSource($templateFile, $depth = 0) {
+        //prevent infinite recursion (e.g. template including itself)
+        if ($depth > 20) {
+            throw new Exception("Template include depth exceeded in '" . $templateFile . "'");
+            return false;
+        }
+
+        $templatePath = __DIR__ . '/' . $templateFile . '.enp';
+        if (!file_exists($templatePath)) {
+            throw new Exception("Template file '" . $templatePath . "' not found");
+            return false;
+        }
+
+        $buffer = file_get_contents($templatePath);
+
+        //DELETE ALL CONTENT BETWEEN {{-- AND --}}
+        $buffer = preg_replace('/\{\{--.*--\}\}/sU', '', $buffer);
+
+        //INCLUDE
+        //insert raw source of included file (not its rendered output), so rendered data is never compiled as template code
+        foreach (explode("\n", $buffer) as $line) {
+            // DO NOT USE PHP_EOL, it will not work on file created on different OS
+            //if line contain @include, get file name between ' or "
+            if (strpos($line, '@include') !== false) {
+                //get file name between '
+                if (getStringBetween($line, "'", "'") !== null) {
+                    $includeFile = getStringBetween($line, "'", "'");
+                } else {
+                    //get file name between "
+                    $includeFile = getStringBetween($line, '"', '"');
+                }
+                $data = loadTemplateSource($includeFile, $depth + 1);
+                $buffer = str_replace($line, $data, $buffer);
+            }
+        }
+
         return $buffer;
     }
 
