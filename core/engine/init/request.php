@@ -1,6 +1,18 @@
 <?php
+    //get request scheme (REQUEST_SCHEME is not set on every server, e.g. nginx or PHP built-in server)
+    if (isset($_SERVER['REQUEST_SCHEME'])) {
+        $scheme = $_SERVER['REQUEST_SCHEME'];
+    } else if ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== '' && strtolower($_SERVER['HTTPS']) !== 'off') || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443)) {
+        $scheme = 'https';
+    } else {
+        $scheme = 'http';
+    }
+
+    //get host (HTTP_HOST is missing when request has no Host header)
+    $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
+
     //get request uri with host and ssl
-    $request = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    $request = $scheme . '://' . $host . $_SERVER['REQUEST_URI'];
     //remove slash at the end
     if (substr($request, -1) === '/') {
         $request = substr($request, 0, -1);
