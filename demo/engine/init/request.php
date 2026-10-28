@@ -1,6 +1,18 @@
 <?php
+    //get request scheme (REQUEST_SCHEME is not set on every server, e.g. nginx or PHP built-in server)
+    if (isset($_SERVER['REQUEST_SCHEME'])) {
+        $scheme = $_SERVER['REQUEST_SCHEME'];
+    } else if ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== '' && strtolower($_SERVER['HTTPS']) !== 'off') || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443)) {
+        $scheme = 'https';
+    } else {
+        $scheme = 'http';
+    }
+
+    //get host (HTTP_HOST is missing when request has no Host header)
+    $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
+
     //get request uri with host and ssl
-    $request = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    $request = $scheme . '://' . $host . $_SERVER['REQUEST_URI'];
     //remove slash at the end
     if (substr($request, -1) === '/') {
         $request = substr($request, 0, -1);
@@ -17,38 +29,6 @@
         'URI' => $request,
         'METHOD' => $_SERVER['REQUEST_METHOD'],
     ];
-
-    //historical reasons, should handle .htaccess
-    if (substr($_ENV['REQUEST']['URI'], 0, 7) === 'public/' || strpos(strtolower($_ENV['REQUEST']['URI']), strtolower(getAppEnvVar('BASE_URL') . 'public/')) === 0) {
-        if (substr($_ENV['REQUEST']['URI'], 0, 7) === 'public/') {
-            $file = getAppEnvVar('BASE_DIRECTORY') . $_ENV['REQUEST']['URI'];
-        } else {
-            $file = getAppEnvVar('BASE_DIRECTORY') . substr($_ENV['REQUEST']['URI'], strlen(getAppEnvVar('BASE_URL')));
-        }
-
-        if (!file_exists($file)) {
-            require_once __DIR__ . '/../errors/404.php';
-            exit;
-        }
-
-        $fileInfo = pathinfo($file);
-        $fileType = $fileInfo['extension'];
-        $mimeType = mime_content_type($file);
-
-        //for security reasons disable php files 
-        if ($fileType === 'php') {
-            require_once __DIR__ . '/../errors/404.php';
-            exit;
-        }
-
-        if ($fileType === 'js' || $fileType === 'css') {
-            $mimeType = 'text/' . $fileType;
-        }
-
-        header("Content-Type: $mimeType");
-        readfile($file);
-        exit;
-    }
 
     function convertHexUrl($url) {
         preg_match_all('/%[0-9a-fA-F]{2}/', $url, $matches);
