@@ -18,14 +18,15 @@
         }
 
         $userId = modelCall("users", "getUserId", ["db" => getDatabaseEnvConn("db"), "username" => $_POST["username"]]);
+        //same message for wrong username and wrong password, so existing usernames cannot be guessed
         if (!$userId) {
-            $_SESSION["errorMessage"] = "Invalid username";
+            $_SESSION["errorMessage"] = "Invalid username or password";
             header("Location: " . getAppEnvVar("BASE_URL") . "/login");
             die();
         }
 
         if (!modelCall("users", "checkPassword", ["db" => getDatabaseEnvConn("db"), "id" => $userId, "password" => $_POST["password"]])) {
-            $_SESSION["errorMessage"] = "Invalid password";
+            $_SESSION["errorMessage"] = "Invalid username or password";
             header("Location: " . getAppEnvVar("BASE_URL") . "/login");
             die();
         }

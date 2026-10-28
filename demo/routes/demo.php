@@ -132,13 +132,16 @@
             for ($i = 0; $i < count($sql); $i++) {
                 echo "Import part [" . ($i + 1) . "/" . count($sql) . "]... (" . DateTime::createFromFormat('U.u', microtime(true))->format("Y-m-d H:i:s:u") . ")<br>";
                 $stmt = $dbConnection->prepare($sql[$i]);
-                $stmt->execute();
+                //mysqli throws exceptions only since PHP 8.1, older versions just return false
+                if (!$stmt || !$stmt->execute()) {
+                    throw new Exception($dbConnection->error);
+                }
             }
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
 
-        echo "<br><span style='color:green;'>Import finished. (" . DateTime::createFromFormat('U.u', microtime(true))->format("Y-m-d H:i:s:u") . ")</span><br>";
+            echo "<br><span style='color:green;'>Import finished. (" . DateTime::createFromFormat('U.u', microtime(true))->format("Y-m-d H:i:s:u") . ")</span><br>";
+        } catch (Exception $e) {
+            echo "<br><span style='color:red;'>Import failed: " . htmlspecialchars($e->getMessage()) . "</span><br>";
+        }
 
     });
 ?>

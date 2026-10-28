@@ -146,13 +146,6 @@
     checkRoute("PATCH", "/admin/posts/edit", function() {
         modelCall("helpers", "checkLogged");
 
-        $slug = getRequestParam("slug");
-        //check if exist
-        $post = modelCall("posts", "getPostBySlug", [getDatabaseEnvConn("db"), $slug]);
-        if (!$post) {
-            
-        }
-
         $data = json_decode(file_get_contents("php://input"), true);
         if (!isset($data["title"]) || !isset($data["slug"]) || !isset($data["text"]) || !isset($data["id"])) {
             http_response_code(400);
