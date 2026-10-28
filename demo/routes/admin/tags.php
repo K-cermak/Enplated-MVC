@@ -61,7 +61,7 @@
             http_response_code(400);
             resourceView([
                 "code" => 400,
-                "message" => "Tag name must be at least 2 characters long and not longer than 70 characters",
+                "message" => "Tag name must be between 2 and 70 characters",
                 "time" => date("Y-m-d H:i:s")
             ], "json");
         }
@@ -70,7 +70,7 @@
             http_response_code(400);
             resourceView([
                 "code" => 400,
-                "message" => "Slug must be at least 2 characters long and not longer than 50 characters",
+                "message" => "Slug must be between 2 and 50 characters",
                 "time" => date("Y-m-d H:i:s")
             ], "json");
         }
@@ -114,7 +114,7 @@
             http_response_code(400);
             resourceView([
                 "code" => 400,
-                "message" => "Tag name must be at least 2 characters long and not longer than 70 characters",
+                "message" => "Tag name must be between 2 and 70 characters",
                 "time" => date("Y-m-d H:i:s")
             ], "json");
         }
@@ -123,7 +123,7 @@
             http_response_code(400);
             resourceView([
                 "code" => 400,
-                "message" => "Slug must be at least 2 characters long and not longer than 50 characters",
+                "message" => "Slug must be between 2 and 50 characters",
                 "time" => date("Y-m-d H:i:s")
             ], "json");
         }
@@ -132,7 +132,7 @@
             http_response_code(409);
             resourceView([
                 "code" => 409,
-                "message" => "Tag already exists",
+                "message" => "Tag does not exist",
                 "time" => date("Y-m-d H:i:s")
             ], "json");
         }
@@ -174,7 +174,7 @@
             http_response_code(409);
             resourceView([
                 "code" => 409,
-                "message" => "Tag is in use",
+                "message" => "Tag is in use and cannot be deleted",
                 "time" => date("Y-m-d H:i:s")
             ], "json");
         }

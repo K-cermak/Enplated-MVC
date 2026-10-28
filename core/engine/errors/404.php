@@ -18,8 +18,8 @@
                 <div class='d-flex align-items-center justify-content-center vh-100' style='background-color: #222222;'>
                     <div class='text-center'>
                         <h1 class='display-1 fw-bold mb-4'>Error | 404</h1>
-                        <p class='lead'>Sorry, but this page does not exist. It may have been deleted or moved.</p>
-                        <p>In case of problems, please contact us by e-mail <strong class='text-info'>info@example.com</strong>.</p>
+                        <p class='lead'>Sorry, this page does not exist. It may have been moved or deleted.</p>
+                        <p>If you need help, please contact us at <strong class='text-info'>info@example.com</strong>.</p>
                         <a href='https://example.com/' class='btn btn-info mt-4'>Back to home page</a>
                     </div>
                 </div>

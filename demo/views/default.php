@@ -107,7 +107,7 @@
     }
 
     function resourceView($data, $defaultType) {
-        //check if POST dataType include type
+        //check if POST includes dataType
         $dataType = '';
         if (!isset($_POST['dataType'])) {
             $dataType = $defaultType;

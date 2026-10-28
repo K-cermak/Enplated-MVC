@@ -11,7 +11,7 @@
             http_response_code(403);
             resourceView([
                 "code" => 403,
-                "message" => "Not logged",
+                "message" => "Not logged in",
                 "time" => date("Y-m-d H:i:s")
             ], "json");
         }

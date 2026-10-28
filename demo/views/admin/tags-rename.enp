@@ -23,8 +23,8 @@
 
 {{--
     THIS COULD BE A SEPARATE FILE, BUT IT IS HERE FOR DEMO SIMPLICITY
-    we could also add checking for length on client side, but it is already in backend and
-    it is not necessary to duplicate it here for demo purposes
+    we could also validate the length on the client side, but the backend already does it,
+    so it is not duplicated here for demo purposes
 --}}
 <script>
     document.querySelector("#tagname").addEventListener("blur", () => {

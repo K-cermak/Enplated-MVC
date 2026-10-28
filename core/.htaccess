@@ -1,8 +1,8 @@
 RewriteEngine on
 
-# redirect all of the /public requests to /public folder
+# serve existing files in the /public folder directly
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^public/(.*)$ public/$1 [L]
 
-# otherwise, redirect to index.php
+# otherwise, route the request to index.php
 RewriteRule ^ index.php

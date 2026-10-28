@@ -7,15 +7,15 @@
 
     <div class="container mt-4 d-flex flex-column align-items-center">
         @if (isset($_GET["success"]) && $_GET["success"] === "createdTag")
-            <div class="alert alert-success alert-dismissible fade show w-50" role="alert">Tag created succesfully.
+            <div class="alert alert-success alert-dismissible fade show w-50" role="alert">Tag created successfully.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @elseif (isset($_GET["success"]) && $_GET["success"] === "deletedTag")
-            <div class="alert alert-success alert-dismissible fade show w-50" role="alert">Tag deleted succesfully.
+            <div class="alert alert-success alert-dismissible fade show w-50" role="alert">Tag deleted successfully.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @elseif (isset($_GET["success"]) && $_GET["success"] === "renamedTag")
-            <div class="alert alert-success alert-dismissible fade show w-50" role="alert">Tag renamed succesfully.
+            <div class="alert alert-success alert-dismissible fade show w-50" role="alert">Tag renamed successfully.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
@@ -46,12 +46,12 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Create a new Tag</h4>
+                <h4 class="modal-title">Create a new tag</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <div class="alert alert-danger d-none"><strong>Error:</strong> <span class="errorMessage"></span>.</div>
-                <label for="tagname" class="mt-2">Tag:</label>
+                <label for="tagname" class="mt-2">Name:</label>
                 <input class="form-control" type="text" name="tagname" id="tagname" required>
 
                 <label for="slug" class="mt-2">Slug:</label>
@@ -66,8 +66,8 @@
 
 {{--
     THIS COULD BE A SEPARATE FILE, BUT IT IS HERE FOR DEMO SIMPLICITY
-    we could also add checking for length on client side, but it is already in backend and
-    it is not necessary to duplicate it here for demo purposes
+    we could also validate the length on the client side, but the backend already does it,
+    so it is not duplicated here for demo purposes
 --}}
 <script>
     document.querySelector("#tagname").addEventListener("blur", () => {

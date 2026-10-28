@@ -127,7 +127,7 @@
                                 </div>
                             </div>
                             <div class='col-12 mt-4'>
-                                <h3>Error Message:</h3>
+                                <h3>Error message:</h3>
                                 <p class='ms-3'><?php echo $_ENV['ERROR']['msg']; ?></p>
                             </div>
                             <div class='col-12'>
@@ -168,12 +168,12 @@
                         </p>
                         <div class='row ms-3'>
                             <div class='col-12'>
-                                <pre class='bg-dark text-light p-3 codeBlock'><?php //php tag must be here for correct code allignment
+                                <pre class='bg-dark text-light p-3 codeBlock'><?php //php tag must be here for correct code alignment
                                         
                                         //check if file exists
                                         if (!file_exists($file)) {
-                                            echo 'File not found, it was probably evaluated code.<br><br>';
-                                            echo 'Tip: Change DEBUG_BUFFER to true in .env file to see evaluated code in folder /debug.';
+                                            echo 'File not found, the error probably occurred in evaluated (template) code.<br><br>';
+                                            echo 'Tip: Set DEBUG_BUFFER to true in the .env file to save the evaluated code to the /debug folder.';
                                         } else {
                                             $file = fopen($_ENV['ERROR']['file'], 'r');
 

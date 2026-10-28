@@ -40,7 +40,7 @@
         $_SESSION["successMessage"] = "You have been logged out";
 
         if (isset($_GET["changedPassword"])) {
-            $_SESSION["successMessage"] = "Password changed successfully, please login again";
+            $_SESSION["successMessage"] = "Password changed successfully, please log in again";
         }
         header("Location: " . getAppEnvVar("BASE_URL") . "/login");
     });

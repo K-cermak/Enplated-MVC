@@ -2,7 +2,7 @@
 @include("admin/header")
 
 <main class="text-center mt-3">
-    <h4>My profile</h4>
+    <h4>My Profile</h4>
 
     <div class="container mt-3">
         <div class="d-flex flex-column align-items-center">
@@ -74,8 +74,8 @@
 
 {{--
     THIS COULD BE A SEPARATE FILE, BUT IT IS HERE FOR DEMO SIMPLICITY
-    we could also add checking for length on client side, but it is already in backend and
-    it is not necessary to duplicate it here for demo purposes
+    we could also validate the length on the client side, but the backend already does it,
+    so it is not duplicated here for demo purposes
 --}}
 <script>
     //CHANGE USERNAME
@@ -130,12 +130,12 @@
         let newPassword2 = document.querySelector("#newPassword2").value;
         let errorBox = document.querySelector("#changePassword .errorMessage");
 
-        // we could add checking for new password length, but it is already in backend and
-        // it is not necessary to duplicate it here for demo purposes
+        // we could also validate the new password length here, but the backend already does it,
+        // so it is not duplicated here for demo purposes
 
         if (newPassword !== newPassword2) {
             errorBox.parentNode.classList.remove("d-none");
-            errorBox.innerText = "Passwords do not match.";
+            errorBox.innerText = "Passwords do not match";
             return;
         }
 

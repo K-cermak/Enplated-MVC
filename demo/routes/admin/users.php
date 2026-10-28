@@ -28,7 +28,7 @@
             http_response_code(400);
             resourceView([
                 "code" => 400,
-                "message" => "Username must be at least 3 characters long and not longer than 50 characters",
+                "message" => "Username must be between 3 and 50 characters",
                 "time" => date("Y-m-d H:i:s")
             ], "json");
         }
@@ -131,7 +131,7 @@
             http_response_code(400);
             resourceView([
                 "code" => 400,
-                "message" => "Username must be at least 3 characters long and not longer than 50 characters",
+                "message" => "Username must be between 3 and 50 characters",
                 "time" => date("Y-m-d H:i:s")
             ], "json");
         }

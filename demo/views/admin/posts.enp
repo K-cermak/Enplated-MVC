@@ -7,11 +7,11 @@
 
     <div class="container mt-4 d-flex flex-column align-items-center">
         @if (isset($_GET["success"]) && $_GET["success"] === "created")
-            <div class="alert alert-success alert-dismissible fade show w-50" role="alert">Post created succesfully.
+            <div class="alert alert-success alert-dismissible fade show w-50" role="alert">Post created successfully.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @elseif (isset($_GET["success"]) && $_GET["success"] === "deletedPost")
-            <div class="alert alert-success alert-dismissible fade show w-50" role="alert">Post deleted succesfully.
+            <div class="alert alert-success alert-dismissible fade show w-50" role="alert">Post deleted successfully.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif

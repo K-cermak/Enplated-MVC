@@ -1,5 +1,5 @@
 <?php
-    //loading .env file into a super global $_ENV
+    //load the .env file into the $_ENV superglobal
     $env = parse_ini_file(__DIR__ . '/../../.env', true);
 
     foreach($env as $key => $value) {

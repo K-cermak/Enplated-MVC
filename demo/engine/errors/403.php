@@ -18,8 +18,8 @@
         <div class='d-flex align-items-center justify-content-center vh-100' style='background-color: #222222;'>
             <div class='text-center'>
                 <h1 class='display-1 fw-bold mb-4'>Error | 403</h1>
-                <p class='lead'>You have been denied access to this page or resource.</p>
-                <p>In case of problems, please contact us by e-mail <strong class='text-warning'>info@example.com</strong>.</p>
+                <p class='lead'>You do not have permission to access this page or resource.</p>
+                <p>If you need help, please contact us at <strong class='text-warning'>info@example.com</strong>.</p>
                 <a href='https://example.com/' class='btn btn-warning mt-4'>Back to home page</a>
             </div>
         </div>

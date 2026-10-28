@@ -1,16 +1,16 @@
 # Demo Blog
 
-- Simple blog website, built completely with Enplated MVC.
-- All Functions:
+- A simple blog built entirely with Enplated MVC.
+- Features:
     - **User section**:
-        - Post listing
-        - Reading of posts
-        - Listing by tags 
+        - Listing posts
+        - Reading posts
+        - Filtering posts by tag
 
     - **Admin section**:
         - Login
-        - Posts creation, editing and deletion
-        - Tags creation, editing and deletion
+        - Creating, editing, and deleting posts
+        - Creating, renaming, and deleting tags
         - Assigning tags to posts
         - User management
         - Profile management
@@ -18,12 +18,12 @@
 
 <br/>
 
-# Downloading this Demo
-- **Just downloading the demo:**
-    - Go to releases and download demo.zip.
+# Downloading the demo
+- **Demo only:**
+    - Go to Releases and download `demo.zip`.
 
-- **Downloading including the Enplated MVC Core:**
-    - Download this repo or clone it using git:
+- **Demo including the Enplated MVC core:**
+    - Download this repository or clone it using git:
     <br><br>
     ```bash
     git clone https://github.com/K-cermak/Enplated-MVC.git
@@ -32,15 +32,15 @@
 <br/>
 
 # Installation
-- Create some empty database.
-- Extract the `demo.zip` / `demo` folder file into some directory.
-- Go to `.env` file and set:
-    - `BASE_URL` to your actual URL (e.g. http://localhost/enplated_mvc/demo). DO **NOT** ADD SLASH AT THE END.
-    - `DB_*` credentials to your database.
+- Create an empty database.
+- Extract `demo.zip` (or copy the `demo` folder) into a directory on your web server.
+- Open the `.env` file and set:
+    - `BASE_URL` to your actual URL (e.g. http://localhost/enplated_mvc/demo). Do **not** add a trailing slash.
+    - `DB_*` to your database credentials.
 
 <br/>
 
-# Import database
+# Importing the database
 - **Automatic import:**
     - Open this URL in your browser:
     <br><br>
@@ -49,22 +49,22 @@
     (e.g. http://localhost/enplated_mvc/demo/run/import )
     ```
 
-- **Manual import**
+- **Manual import:**
     - Go to phpMyAdmin or any other database management tool.
-    - Copy content of <a href="https://github.com/K-cermak/Enplated-MVC/blob/main/demo/database.sql" target="_blank">database.sql file</a> and run it.
+    - Copy the contents of the <a href="https://github.com/K-cermak/Enplated-MVC/blob/main/demo/database.sql" target="_blank">database.sql</a> file and run it.
 
 <br/>
 
 # Opening the website
 - Open your browser and go to your BASE_URL (e.g. http://localhost/enplated_mvc/demo).
-- If you want to login, click on `Admin dashboard` in the top right corner (or go to \*BASE_URL\*/admin)
+- To log in, click `Admin dashboard` in the top-right corner (or go to \*BASE_URL\*/admin).
     - Login credentials are:
         - `admin` (password: `password`)
         - `admin2` (password: `123456`)
 
 <br/>
 
-### Sources used for this Demo:
+### Sources used in this demo:
 - Bootstrap (https://getbootstrap.com)
 - Bootstrap Icons (https://icons.getbootstrap.com)
 - Google Fonts (https://fonts.google.com)

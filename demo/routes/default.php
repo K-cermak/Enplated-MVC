@@ -23,11 +23,11 @@
         }
 
         if ($_ENV['REQUEST']['METHOD'] !== $method) {
-            logToJsConsole('Method not match, skipping');
+            logToJsConsole('Method does not match, skipping');
             return;
         }
 
-        //if path include variables
+        //if path includes variables
         if (strpos($path, '{') !== false) {
             variableRouteCheck($path, $callback);
         } else {
@@ -38,7 +38,7 @@
     function simpleRouteCheck($path, $callback) {
         logToJsConsole('Checking SIMPLE route');
 
-        //if part contain ?, remove text after ?
+        //if part contains ?, remove text after ?
         if (strpos($_ENV['REQUEST']['URI'], '?') !== false) {
             $requestPath = explode('?', $_ENV['REQUEST']['URI'])[0];
         } else {
@@ -57,13 +57,13 @@
         $pathParts = explode('/', $path);
         $requestParts = explode('/', $_ENV['REQUEST']['URI']);
 
-        //remove empty parts and parts that starts with ?
+        //remove empty parts and parts that start with ?
         $pathParts = array_filter($pathParts);
         $requestParts = array_filter($requestParts, function ($part) {
             return $part !== '' && substr($part, 0, 1) !== '?';
         });
 
-        //if part contain ?, remove text after ?
+        //if part contains ?, remove text after ?
         $requestParts = array_map(function ($part) {
             if (strpos($part, '?')) {
                 return substr($part, 0, strpos($part, '?'));
@@ -77,7 +77,7 @@
 
         //check if path and request match
         if (count($pathParts) !== count($requestParts)) {
-            logToJsConsole('Path not match, skipping (different length) - (' . count($pathParts) . ' vs ' . count($requestParts) . ')');
+            logToJsConsole('Path does not match, skipping (different length) - (' . count($pathParts) . ' vs ' . count($requestParts) . ')');
             return;
         }
 
@@ -87,7 +87,7 @@
                 $variableName = substr($pathParts[$i], 1, -1);
                 $_ENV['REQUEST']['PARAMS'][$variableName] = $requestParts[$i];
             } else if ($pathParts[$i] !== $requestParts[$i]) {
-                logToJsConsole('Path not match, skipping (different parts) - (' . $pathParts[$i] . ' vs ' . $requestParts[$i] . ')');
+                logToJsConsole('Path does not match, skipping (different parts) - (' . $pathParts[$i] . ' vs ' . $requestParts[$i] . ')');
                 return;
             }
         }

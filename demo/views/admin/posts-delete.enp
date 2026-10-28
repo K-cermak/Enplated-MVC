@@ -5,7 +5,7 @@
 </script> 
 
 <main class="text-center mt-3">
-    <h4>Delete posts</h4>
+    <h4>Delete post</h4>
     <a href="{{ env("BASE_URL") }}/admin/posts" class="btn btn-primary mt-3"><i class="bi bi-arrow-left"></i> Back to posts</a>
     
     <div class="container mt-5 text-center">

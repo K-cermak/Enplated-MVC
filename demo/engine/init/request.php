@@ -11,9 +11,9 @@
     //get host (HTTP_HOST is missing when request has no Host header)
     $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 
-    //get request uri with host and ssl
+    //get request uri with scheme and host
     $request = $scheme . '://' . $host . $_SERVER['REQUEST_URI'];
-    //remove slash at the end
+    //remove trailing slash
     if (substr($request, -1) === '/') {
         $request = substr($request, 0, -1);
     }

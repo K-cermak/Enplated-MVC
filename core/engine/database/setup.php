@@ -39,7 +39,7 @@
                         <div class="col-12">
                         <div class="alert alert-danger text-center" role="alert">
                             <h4 class="alert-heading mt-4">Database Error</h4>
-                            <p>Unfortunately, it was not possible to connect to the database.<br>Please try again later. Sorry for the complications.</p>
+                            <p>Unfortunately, we could not connect to the database.<br>Please try again later. We apologize for the inconvenience.</p>
                             <hr>
                             <p class="mb-0 px-5 mx-5">If the problem persists, please contact us at <strong>info@example.com</strong>.</p>
                         </div>
