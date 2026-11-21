@@ -1,8 +1,12 @@
 <p align="center">
     <a href="https://enplated.karlosoft.com/mvc/">
-        <img src="https://cdn.karlosoft.com/cdn-data/ks/img/enplated/github/enp-mvc.svg" width="700" height="150" alt="Enplated MVC logo">
-    </a>
-    <br/>
+        <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="https://cdn.karlosoft.com/cdn-data/ks/img/enplated/enp-mvc.svg">
+            <source media="(prefers-color-scheme: light)" srcset="https://cdn.karlosoft.com/cdn-data/ks/img/enplated/enp-mvc-dark.svg">
+            <img alt="Enplated mvc" src="https://cdn.karlosoft.com/cdn-data/ks/img/enplated/enp-mvc-dark.svg" width="700">
+        </picture>
+        </a>
+    <br>
     <strong>Simple and powerful PHP framework based on the MVC architecture.</strong>
     <br><br>
     <img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT License">
