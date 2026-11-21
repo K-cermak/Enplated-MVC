@@ -3,9 +3,9 @@
         <picture>
             <source media="(prefers-color-scheme: dark)" srcset="https://cdn.karlosoft.com/cdn-data/ks/img/enplated/enp-mvc.svg">
             <source media="(prefers-color-scheme: light)" srcset="https://cdn.karlosoft.com/cdn-data/ks/img/enplated/enp-mvc-dark.svg">
-            <img alt="Enplated mvc" src="https://cdn.karlosoft.com/cdn-data/ks/img/enplated/enp-mvc-dark.svg" width="700">
+            <img alt="Enplated MVC" src="https://cdn.karlosoft.com/cdn-data/ks/img/enplated/enp-mvc-dark.svg" width="700">
         </picture>
-        </a>
+    </a>
     <br>
     <strong>Simple and powerful PHP framework based on the MVC architecture.</strong>
     <br><br>
